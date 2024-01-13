@@ -14,8 +14,14 @@ public class UserServiceImpl implements UserService {
   UserRepository userRepository;
 
   @Override
-  public User createUser(User user) throws Exception {
-    return userRepository.save(user);
+  public User signUpUser(User user) throws Exception {
+    Boolean userExists = userRepository.existsByEmail(user.getEmail());
+
+    if (userExists) {
+      throw new Exception("Email is taken!");
+    } else {
+      return userRepository.save(user);
+    }
   }
 
   @Override
@@ -33,7 +39,5 @@ public class UserServiceImpl implements UserService {
         throw new Exception("Wrong password");
       }
     }
-
-
   }
 }

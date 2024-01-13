@@ -21,11 +21,12 @@ public class User {
   @Getter
   @Setter
   private String username;
+
   @Getter
   @Setter
-
   @Column(unique = true)
   private String email;
+
   @Getter
   @Setter
   private String password;
