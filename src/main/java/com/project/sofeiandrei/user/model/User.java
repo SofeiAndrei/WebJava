@@ -1,35 +1,49 @@
 package com.project.sofeiandrei.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId" )
+public class User implements Serializable {
   @Getter
   public static User signedInUser;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   @Getter
   @Setter
   private Long userId;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   private String username;
 
   @Getter
   @Setter
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   private String password;
+
+  @Getter
+  @Setter
+  @ManyToMany(mappedBy = "users")
+  private Set<Trip> trips = new HashSet<Trip>();
 
   public User(Long userId, String username, String email, String password) {
     this.userId = userId;
@@ -48,5 +62,15 @@ public class User {
       ", email='" + email + '\'' +
       ", password='" + password + '\'' +
       '}';
+  }
+
+  public void addTrip(Trip trip) {
+    trips.add(trip);
+    trip.getUsers().add(this);
+  }
+
+  public void removeTrip(Trip trip) {
+    trips.remove(trip);
+    trip.getUsers().remove(this);
   }
 }
