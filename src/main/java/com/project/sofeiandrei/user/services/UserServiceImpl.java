@@ -4,9 +4,10 @@ import com.project.sofeiandrei.user.model.User;
 import com.project.sofeiandrei.user.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("user_service")
 @Transactional
 public class UserServiceImpl implements UserService {
 

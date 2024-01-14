@@ -1,9 +1,13 @@
 package com.project.sofeiandrei.user.model;
 
+import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +34,11 @@ public class User {
   @Getter
   @Setter
   private String password;
+
+  @Getter
+  @Setter
+  @ManyToMany(mappedBy = "users")
+  private Set<Trip> trips = new HashSet<Trip>();
 
   public User(Long userId, String username, String email, String password) {
     this.userId = userId;
