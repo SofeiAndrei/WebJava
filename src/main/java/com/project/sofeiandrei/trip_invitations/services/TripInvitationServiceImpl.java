@@ -26,7 +26,7 @@ public class TripInvitationServiceImpl implements TripInvitationService {
 
   @Override
   public void sendInvitation(Long tripId, Long userId) throws Exception {
-    User sender = User.getSignedInUser();
+    User sender = User.signedInUser;
     Optional<User> receiver = userRepository.findById(userId);
     Optional<Trip> trip = tripRepository.findById(tripId);
 
@@ -60,7 +60,6 @@ public class TripInvitationServiceImpl implements TripInvitationService {
       User.getSignedInUser().addTrip(tripInvitation.getTrip());
       tripInvitationRepository.delete(tripInvitation);
     }
-
   }
 
   @Override
@@ -92,7 +91,7 @@ public class TripInvitationServiceImpl implements TripInvitationService {
   }
 
   private TripInvitation checkConditionsAndReturnTripInvitation(Long tripId, Long userId) throws Exception {
-    if (User.getSignedInUser() == null) {
+    if (User.signedInUser == null) {
       throw new Exception("User not logged in");
     } else {
       Optional<TripInvitation> tripInvitation = findTripInvitation(userId, tripId);
