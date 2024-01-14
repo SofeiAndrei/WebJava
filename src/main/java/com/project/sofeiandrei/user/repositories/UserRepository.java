@@ -1,7 +1,6 @@
 package com.project.sofeiandrei.user.repositories;
 
 import com.project.sofeiandrei.user.model.User;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

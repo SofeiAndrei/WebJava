@@ -15,22 +15,25 @@ import java.util.Set;
 public class Trip {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   @Getter
   @Setter
   private Long tripId;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   private String location;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date startDate;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date endDate;
 

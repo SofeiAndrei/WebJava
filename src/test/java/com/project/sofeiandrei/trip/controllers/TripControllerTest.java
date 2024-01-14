@@ -67,9 +67,8 @@ public class TripControllerTest {
     User.signedInUser = new User();
 
     HttpServletRequest request = mock(HttpServletRequest.class);
-    when(request.getAttribute("userId")).thenReturn((Long) 0L);
 
-    ResponseEntity<List<Trip>> responseEntity = tripController.getAllTrips(request);
+    ResponseEntity<List<Trip>> responseEntity = tripController.getAllTrips(request, (Long) 0L);
     assertEquals(200, responseEntity.getStatusCode().value());
     verify(tripService, times(1)).findAllUserTrips(any());
   }
@@ -77,12 +76,11 @@ public class TripControllerTest {
   @Test
   void testGetAllTripsFailure() throws Exception {
     HttpServletRequest request = mock(HttpServletRequest.class);
-    when(request.getAttribute("userId")).thenReturn((Long) 0L);
 
-    when(tripController.getAllTrips(request)).thenThrow(new Exception("User does not exist"));
+    when(tripController.getAllTrips(request, (Long) 0L)).thenThrow(new Exception("User does not exist"));
 
     assertThrowsExactly(Exception.class, () -> {
-      tripController.getAllTrips(request);
+      tripController.getAllTrips(request, (Long) 0L);
     }, "User does not exist");
   }
 

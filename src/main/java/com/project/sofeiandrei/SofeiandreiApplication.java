@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(scanBasePackages={"com.project.sofeiandrei"})
+@SpringBootApplication()
 public class SofeiandreiApplication {
 
 	public static void main(String[] args) {

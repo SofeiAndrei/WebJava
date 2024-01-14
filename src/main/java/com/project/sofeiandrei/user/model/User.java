@@ -3,7 +3,6 @@ package com.project.sofeiandrei.user.model;
 import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -17,22 +16,24 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   @Getter
   @Setter
   private Long userId;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   private String username;
 
   @Getter
   @Setter
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
   @Getter
   @Setter
+  @Column(nullable = false)
   private String password;
 
   @Getter

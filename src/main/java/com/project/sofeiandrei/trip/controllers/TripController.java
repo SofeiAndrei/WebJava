@@ -4,7 +4,6 @@ import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.services.TripService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +28,7 @@ public class TripController {
   }
 
   @GetMapping("")
-  public ResponseEntity<List<Trip>> getAllTrips(HttpServletRequest request) throws Exception {
-    Long userId = (Long) request.getAttribute("userId");
+  public ResponseEntity<List<Trip>> getAllTrips(HttpServletRequest request, @RequestParam Long userId) throws Exception {
     List<Trip> trips = tripService.findAllUserTrips(userId);
     return new ResponseEntity<>(trips, HttpStatus.OK);
   }
