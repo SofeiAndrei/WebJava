@@ -2,6 +2,7 @@ package com.project.sofeiandrei.trip.services;
 
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.repositories.TripRepository;
+import com.project.sofeiandrei.user.model.User;
 import com.project.sofeiandrei.user.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class TripServiceImpl implements TripService {
 
   @Override
   public Trip createTrip(Trip trip){
+    User.getSignedInUser().addTrip(trip);
     return tripRepository.save(trip);
   }
 

@@ -1,16 +1,20 @@
 package com.project.sofeiandrei.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId" )
+public class User implements Serializable {
   @Getter
   public static User signedInUser;
 
@@ -58,5 +62,15 @@ public class User {
       ", email='" + email + '\'' +
       ", password='" + password + '\'' +
       '}';
+  }
+
+  public void addTrip(Trip trip) {
+    trips.add(trip);
+    trip.getUsers().add(this);
+  }
+
+  public void removeTrip(Trip trip) {
+    trips.remove(trip);
+    trip.getUsers().remove(this);
   }
 }
