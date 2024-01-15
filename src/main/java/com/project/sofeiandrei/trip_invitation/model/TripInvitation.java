@@ -1,4 +1,4 @@
-package com.project.sofeiandrei.trip_invitations.model;
+package com.project.sofeiandrei.trip_invitation.model;
 
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.user.model.User;

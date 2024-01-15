@@ -1,6 +1,6 @@
-package com.project.sofeiandrei.trip_invitations.repositories;
+package com.project.sofeiandrei.trip_invitation.repositories;
 
-import com.project.sofeiandrei.trip_invitations.model.TripInvitation;
+import com.project.sofeiandrei.trip_invitation.model.TripInvitation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

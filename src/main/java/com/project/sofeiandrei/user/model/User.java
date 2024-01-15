@@ -2,6 +2,7 @@ package com.project.sofeiandrei.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -42,8 +43,16 @@ public class User implements Serializable {
 
   @Getter
   @Setter
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
   private Set<Trip> trips = new HashSet<Trip>();
+
+  @Getter
+  @Setter
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "expense_participants", schema = "public",
+          joinColumns = {@JoinColumn(name = "user_id")},
+          inverseJoinColumns = {@JoinColumn(name = "expense_id")})
+  private Set<Expense> expenses = new HashSet<Expense>();
 
   public User(Long userId, String username, String email, String password) {
     this.userId = userId;

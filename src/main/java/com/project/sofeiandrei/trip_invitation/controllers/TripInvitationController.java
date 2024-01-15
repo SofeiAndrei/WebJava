@@ -1,7 +1,7 @@
-package com.project.sofeiandrei.trip_invitations.controller;
+package com.project.sofeiandrei.trip_invitation.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.project.sofeiandrei.trip_invitations.services.TripInvitationService;
+import com.project.sofeiandrei.trip_invitation.services.TripInvitationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

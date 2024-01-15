@@ -1,18 +1,19 @@
-package com.project.sofeiandrei.trip_invitations.services;
+package com.project.sofeiandrei.trip_invitation.services;
 
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.repositories.TripRepository;
-import com.project.sofeiandrei.trip_invitations.model.TripInvitation;
-import com.project.sofeiandrei.trip_invitations.repositories.TripInvitationRepository;
+import com.project.sofeiandrei.trip_invitation.model.TripInvitation;
+import com.project.sofeiandrei.trip_invitation.repositories.TripInvitationRepository;
 import com.project.sofeiandrei.user.model.User;
 import com.project.sofeiandrei.user.repositories.UserRepository;
-import com.project.sofeiandrei.user.services.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service("trip_invitation_service")
+@Transactional
 public class TripInvitationServiceImpl implements TripInvitationService {
 
   @Autowired
