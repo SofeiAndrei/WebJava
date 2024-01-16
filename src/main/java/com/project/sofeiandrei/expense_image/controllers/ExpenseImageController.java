@@ -22,24 +22,18 @@ public class ExpenseImageController {
   ExpenseImageService expenseImageService;
   @PostMapping("")
   public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile image, @PathVariable("expenseId") Long expenseId) throws Exception {
-    try {
-      expenseImageService.uploadImage(image, expenseId);
+    String uploadImage = expenseImageService.uploadImage(image, expenseId);
 
-      return ResponseEntity.status(HttpStatus.OK)
-              .body(String.format("File uploaded successfully: %s", image.getOriginalFilename()));
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-              .body(String.format("Could not upload the file: %s!", image.getOriginalFilename()));
-    }
+    return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
   }
 
   @GetMapping("/{expenseImageId}")
   public ResponseEntity<byte[]> downloadImage(@PathVariable("expenseImageId") Long expenseImageId) throws Exception {
-    ExpenseImage expenseImage = expenseImageService.downloadImage(expenseImageId);
+    byte[] expenseImageData = expenseImageService.downloadImage(expenseImageId);
     return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + expenseImage.getName() + "\"")
-            .contentType(MediaType.valueOf("image/jpg"))
-            .body(expenseImage.getImageData());
+            .contentType(MediaType.IMAGE_PNG)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + expenseImageId + "\"")
+            .body(expenseImageData);
   }
 
   @GetMapping("")
@@ -63,5 +57,4 @@ public class ExpenseImageController {
 
     return expenseImageResponse;
   }
-
 }

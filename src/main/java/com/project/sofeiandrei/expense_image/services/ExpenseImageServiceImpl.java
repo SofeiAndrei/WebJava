@@ -8,6 +8,8 @@ import com.project.sofeiandrei.expense_image.utils.ImageUtils;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,18 +32,24 @@ public class ExpenseImageServiceImpl implements ExpenseImageService {
   public String uploadImage(MultipartFile imageFile, Long expenseId) throws Exception {
     Expense expense = expenseRepository.findById(expenseId).orElseThrow(() -> new Exception("Expense not found"));
 
-    ExpenseImage imageToSave = new ExpenseImage();
-    imageToSave.setName(StringUtils.cleanPath(imageFile.getOriginalFilename()));
-    imageToSave.setExpense(expense);
-    imageToSave.setImageData(imageFile.getBytes());
+    var imageToSave = ExpenseImage.builder()
+            .name(imageFile.getOriginalFilename())
+            .expense(expense)
+            .imageData(imageFile.getBytes())
+            .build();
 
     expenseImageRepository.save(imageToSave);
     return "file uploaded successfully : " + imageFile.getOriginalFilename();
   }
 
   @Override
-  public ExpenseImage downloadImage(Long expenseImageId) throws Exception {
-    return expenseImageRepository.findById(expenseImageId).orElseThrow(() -> new Exception("Image not found"));
+  public byte[] downloadImage(Long expenseImageId) throws Exception {
+    Optional<ExpenseImage> expenseImage = expenseImageRepository.findById(expenseImageId);
+    if (expenseImage.isEmpty()) {
+      throw new Exception("Image not found");
+    } else {
+      return expenseImage.get().getImageData();
+    }
   }
 
   @Override

@@ -4,28 +4,29 @@ import com.project.sofeiandrei.expense.model.Expense;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
+@Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "expense_images")
 public class ExpenseImage {
-  @Getter
   @Setter
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long expenseImageId;
 
-  @Getter
   @Setter
   @Column(nullable = false)
   private String name;
 
-  @Getter
   @Setter
   @ManyToOne
   @JoinColumn(name = "expense_id")
   private Expense expense;
 
   @Lob
-  @Getter
   @Setter
   private byte[] imageData;
 }
