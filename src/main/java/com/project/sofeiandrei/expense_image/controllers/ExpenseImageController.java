@@ -44,7 +44,7 @@ public class ExpenseImageController {
             .collect(Collectors.toList());
   }
 
-  private ExpenseImageResponse mapToExpenseImageResponse(ExpenseImage expenseImage) {
+  public ExpenseImageResponse mapToExpenseImageResponse(ExpenseImage expenseImage) {
     String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath()
             .path("/api/expenses/1/expense_images/")
             .path(expenseImage.getExpenseImageId().toString())
