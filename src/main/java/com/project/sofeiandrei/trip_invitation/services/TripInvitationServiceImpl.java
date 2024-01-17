@@ -27,16 +27,12 @@ public class TripInvitationServiceImpl implements TripInvitationService {
 
   @Override
   public void sendInvitation(Long tripId, Long userId) throws Exception {
-    User sender = User.signedInUser;
-    Optional<User> receiver = userRepository.findById(userId);
-    Optional<Trip> trip = tripRepository.findById(tripId);
+    User sender = User.getSignedInUser();
+    User receiver = userRepository.findById(userId).orElseThrow(() -> new Exception("Receiver User not found"));
+    Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new Exception("Trip not found"));
 
     if (sender == null) {
       throw new Exception("User not logged in");
-    } else if (receiver.isEmpty()) {
-      throw new Exception("Receiver User not found");
-    } else if (trip.isEmpty()) {
-      throw new Exception("Trip not found");
     } else {
       TripInvitation.TripInvitationId tripInvitationId = new TripInvitation.TripInvitationId();
       tripInvitationId.setReceiverId(userId);
@@ -45,8 +41,8 @@ public class TripInvitationServiceImpl implements TripInvitationService {
       TripInvitation tripInvitation = new TripInvitation();
       tripInvitation.setTripInvitationId(tripInvitationId);
       tripInvitation.setSender(sender);
-      tripInvitation.setReceiver(receiver.get());
-      tripInvitation.setTrip(trip.get());
+      tripInvitation.setReceiver(receiver);
+      tripInvitation.setTrip(trip);
 
       tripInvitationRepository.save(tripInvitation);
     }
@@ -95,11 +91,8 @@ public class TripInvitationServiceImpl implements TripInvitationService {
     if (User.signedInUser == null) {
       throw new Exception("User not logged in");
     } else {
-      Optional<TripInvitation> tripInvitation = findTripInvitation(userId, tripId);
-      if (tripInvitation.isEmpty()) {
-        throw new Exception("Trip Invitation not found");
-      }
-      return tripInvitation.get();
+      TripInvitation tripInvitation = findTripInvitation(userId, tripId).orElseThrow(() -> new Exception("Trip Invitation not found"));
+      return tripInvitation;
     }
   }
 
