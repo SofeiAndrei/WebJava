@@ -1,5 +1,6 @@
 package com.project.sofeiandrei.trip.repositories;
 
+import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.trip.model.Trip;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

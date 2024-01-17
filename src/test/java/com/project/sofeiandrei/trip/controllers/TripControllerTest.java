@@ -4,7 +4,6 @@ import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.services.TripService;
 import com.project.sofeiandrei.user.model.User;
 import com.project.sofeiandrei.user.services.UserService;
-import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +12,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.Principal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;

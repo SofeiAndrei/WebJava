@@ -1,5 +1,6 @@
 package com.project.sofeiandrei.trip.services;
 
+import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.repositories.TripRepository;
 import com.project.sofeiandrei.user.model.User;
@@ -23,6 +24,7 @@ public class TripServiceImpl implements TripService {
   @Override
   public Trip createTrip(Trip trip){
     User.getSignedInUser().addTrip(trip);
+
     return tripRepository.save(trip);
   }
 
@@ -63,5 +65,12 @@ public class TripServiceImpl implements TripService {
       tripRepository.deleteById(tripId);
       return "Trip deleted successfully";
     }
+  }
+
+  @Override
+  public List<Expense> getAllTripExpenses(Long tripId) throws Exception {
+    Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new Exception("Trip not found"));
+
+    return trip.getExpenses();
   }
 }

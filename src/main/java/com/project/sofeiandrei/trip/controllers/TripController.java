@@ -1,5 +1,6 @@
 package com.project.sofeiandrei.trip.controllers;
 
+import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.services.TripService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,11 @@ public class TripController {
   @GetMapping("/{tripId}")
   public ResponseEntity<Trip> getTrip(HttpServletRequest request, @PathVariable("tripId") Long tripId) throws Exception {
     return ResponseEntity.ok(tripService.findById(tripId));
+  }
+
+  @GetMapping("{tripId}/expenses")
+  public ResponseEntity<List<Expense>> getTripExpenses(HttpServletRequest request, @PathVariable("tripId") Long tripId) throws Exception {
+    return ResponseEntity.ok(tripService.getAllTripExpenses(tripId));
   }
 
   @GetMapping("")

@@ -1,4 +1,4 @@
-package com.project.sofeiandrei.trip_invitations.services;
+package com.project.sofeiandrei.trip_invitation.services;
 
 public interface TripInvitationService {
   public void sendInvitation(Long tripId, Long userId) throws Exception;

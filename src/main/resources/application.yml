@@ -10,9 +10,16 @@ spring:
     show-sql: false
     properties:
       hibernate:
+        jdbc:
+            lob:
+                non_contextual_creation: true
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
 
 server:
   port: 4000

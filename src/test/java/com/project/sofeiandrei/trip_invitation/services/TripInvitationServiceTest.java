@@ -1,9 +1,9 @@
-package com.project.sofeiandrei.trip_invitations.services;
+package com.project.sofeiandrei.trip_invitation.services;
 
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.trip.repositories.TripRepository;
-import com.project.sofeiandrei.trip_invitations.model.TripInvitation;
-import com.project.sofeiandrei.trip_invitations.repositories.TripInvitationRepository;
+import com.project.sofeiandrei.trip_invitation.model.TripInvitation;
+import com.project.sofeiandrei.trip_invitation.repositories.TripInvitationRepository;
 import com.project.sofeiandrei.user.model.User;
 import com.project.sofeiandrei.user.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
