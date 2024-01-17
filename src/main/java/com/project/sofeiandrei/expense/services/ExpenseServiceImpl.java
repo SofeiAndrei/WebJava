@@ -26,14 +26,15 @@ public class ExpenseServiceImpl implements ExpenseService{
 
   @Override
   public Expense createExpense(Expense expense, Long tripId) throws Exception {
-    User signedInUser = userRepository.findById(User.signedInUser.getUserId())
-            .orElseThrow(() -> new Exception("Signed-in User not found"));
+    if (User.getSignedInUser() == null) {
+      throw new Exception("User not signed in");
+    }
 
     Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new Exception("Trip not found"));
 
     trip.addExpense(expense);
 
-    expense.addParticipant(signedInUser);
+    expense.addParticipant(User.getSignedInUser());
 
     return expenseRepository.save(expense);
   }
