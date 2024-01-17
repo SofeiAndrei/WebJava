@@ -3,6 +3,7 @@ package com.project.sofeiandrei.trip_invitation.model;
 import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ public class TripInvitation {
   @JoinColumn(name = "sender_id")
   @Getter
   @Setter
+  @NotBlank(message = "Sender is mandatory")
   private User sender;
 
   @ManyToOne
@@ -29,6 +31,7 @@ public class TripInvitation {
   @JoinColumn(name = "receiver_id")
   @Getter
   @Setter
+  @NotBlank(message = "Receiver is mandatory")
   private User receiver;
 
   @ManyToOne
@@ -36,6 +39,7 @@ public class TripInvitation {
   @JoinColumn(name = "trip_id")
   @Getter
   @Setter
+  @NotBlank(message = "Trip is mandatory")
   private Trip trip;
 
   @Embeddable

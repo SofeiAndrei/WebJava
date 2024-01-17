@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,17 +27,20 @@ public class Trip implements Serializable {
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Location is mandatory")
   private String location;
 
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Start Date is mandatory")
   @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date startDate;
 
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "End Date is mandatory")
   @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date endDate;
 

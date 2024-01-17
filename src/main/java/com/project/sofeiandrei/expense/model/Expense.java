@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.sofeiandrei.expense_image.model.ExpenseImage;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,17 +27,20 @@ public class Expense {
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Name is mandatory")
   private String name;
 
   @Getter
   @Setter
   @Column(nullable = false)
   @DateTimeFormat(pattern = "dd/MM/yyyy")
+  @NotBlank(message = "Incurred at Date is mandatory")
   private Date incurredAt;
 
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Amount is mandatory")
   private Float amount;
 
   @Getter

@@ -2,6 +2,7 @@ package com.project.sofeiandrei.expense_image.model;
 
 import com.project.sofeiandrei.expense.model.Expense;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -19,11 +20,13 @@ public class ExpenseImage {
 
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Name is mandatory")
   private String name;
 
   @Setter
   @ManyToOne
   @JoinColumn(name = "expense_id")
+  @NotBlank(message = "Expense is mandatory")
   private Expense expense;
 
   @Lob

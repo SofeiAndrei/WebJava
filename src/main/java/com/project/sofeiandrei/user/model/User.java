@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.trip.model.Trip;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,16 +31,20 @@ public class User implements Serializable {
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Username is mandatory")
   private String username;
 
   @Getter
   @Setter
   @Column(unique = true, nullable = false)
+  @NotBlank(message = "Email is mandatory")
+  @Email(message = "Email should be valid")
   private String email;
 
   @Getter
   @Setter
   @Column(nullable = false)
+  @NotBlank(message = "Password is mandatory")
   private String password;
 
   @Getter
