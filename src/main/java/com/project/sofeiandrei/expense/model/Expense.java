@@ -6,7 +6,9 @@ import com.project.sofeiandrei.expense_image.model.ExpenseImage;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +16,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "expenses")
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "expenseId" )
 public class Expense {
 
