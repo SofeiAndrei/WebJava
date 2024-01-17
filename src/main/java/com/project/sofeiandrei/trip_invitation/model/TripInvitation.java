@@ -4,12 +4,16 @@ import com.project.sofeiandrei.trip.model.Trip;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "trip_invitations")
 public class TripInvitation {
   @EmbeddedId

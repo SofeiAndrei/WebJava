@@ -6,7 +6,9 @@ import com.project.sofeiandrei.expense.model.Expense;
 import com.project.sofeiandrei.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +17,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "trips")
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "tripId" )
 public class Trip implements Serializable {
   @Id
